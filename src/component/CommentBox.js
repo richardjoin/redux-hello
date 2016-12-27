@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
+import store from '../store';
 
 class CommentBox extends Component{
   constructor(){
     super();
     this.state={
-      comments:[
-        'hello1',
-        'hello2'
-      ]
+      comments:store.getState()
     }
   }
   hundleSubmit(e){
     e.preventDefault();
-    console.log(this.refs.content.value);
-    let content = this.refs.content.value;
-    let comments = this.state.comments;
-    comments.push(content);
-    this.setState({ comments });
+    console.log(store.getState());
+    store.dispatch({type:'ADD_COMMENT',xx:this.refs.content.value})
+    console.log(store.getState());
+    // 让输入框里保存一次数据就会清零
     this.refs.commentForm.reset();
+    console.log(this.refs);
+    this.setState({comments: store.getState()});
+    // console.log(this.refs.content.value);
+    // let content = this.refs.content.value;
+    // let comments = this.state.comments;
+    // comments.push(content);
+    // this.setState({ comments });
   }
   render(){
     let commentList = this.state.comments.map( (res,i) =>
