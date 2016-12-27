@@ -21554,7 +21554,7 @@
 
 
 	// module
-	exports.push([module.id, "body{\n  margin: 0;\n  padding: 0;\n}\n.clearfix:before,\n.clearfix:after {\n    content: \" \"; /* 1 */\n    display: table; /* 2 */\n}\n.clearfix:after {\n    clear: both;\n}\n.top {\n  height: 600px;\n  background-color: rgb(0, 188, 212);;\n}\n.bottom {\n  height: 600px;\n  background-color: #EEEEEE;\n}\n.post-body, .comment-box {\n  background-color: #fff;\n  width: 600px;\n  height: 300px;\n  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;\n  margin: 60px auto;\n}\n.post-body {\n  position: relative;\n}\n.post-body .comment-num {\n  position: absolute;\n  right: 20px;\n  font-weight: bold;\n  bottom: 20px;\n  width: 80px;\n  height: 45px;\n  line-height: 45px;\n  text-align: center;\n  background-color: rgb(242, 244, 246);\n  color: rgb(76, 87, 101);\n}\n", ""]);
+	exports.push([module.id, "body{\n  margin: 0;\n  padding: 0;\n}\n.clearfix:before,\n.clearfix:after {\n    content: \" \"; /* 1 */\n    display: table; /* 2 */\n}\n.clearfix:after {\n    clear: both;\n}\n.top {\n  height: 450px;\n  background-color: rgb(0, 188, 212);;\n}\n.bottom {\n  height: 600px;\n  background-color: #EEEEEE;\n}\n.post-body, .comment-box {\n  background-color: #fff;\n  width: 600px;\n  height: 300px;\n  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;\n  margin: 60px auto;\n}\n.comment-box{\n  position: relative;\n}\n.comment-box .comment-form{\n  position: absolute;\n  bottom: 10px;\n  left: 16px;\n}\n.comment-form .input{\n  width: 300px;\n  border: none;\n  outline: none;\n}\n.underline{\n  position: absolute;\n  bottom: 10px;\n  width: 300px;\n  left: 16px;\n  border-bottom: 1px solid #666;\n}\n.submit-btn{\n  color: white;\n  font-weight: bold;\n  background-color: #00bcd4;\n  padding: 5px 10px;\n  border: none;\n  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;\n  cursor: pointer;\n}\n.post-body {\n  position: relative;\n}\n.post-body .comment-num {\n  position: absolute;\n  right: 20px;\n  font-weight: bold;\n  bottom: 20px;\n  width: 80px;\n  height: 45px;\n  line-height: 45px;\n  text-align: center;\n  background-color: rgb(242, 244, 246);\n  color: rgb(76, 87, 101);\n}\n.comment{\n  padding-top: 16px;\n  padding-bottom: 16px;\n  border-bottom: 1px solid red;\n}\n", ""]);
 
 	// exports
 
@@ -21971,6 +21971,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "post-body" },
+	        "PostBody",
 	        _react2.default.createElement(
 	          "div",
 	          { className: "comment-num" },
@@ -21989,7 +21990,7 @@
 /* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22015,16 +22016,54 @@
 	  function CommentBox() {
 	    _classCallCheck(this, CommentBox);
 
-	    return _possibleConstructorReturn(this, (CommentBox.__proto__ || Object.getPrototypeOf(CommentBox)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (CommentBox.__proto__ || Object.getPrototypeOf(CommentBox)).call(this));
+
+	    _this.state = {
+	      comments: ['hello1', 'hello2']
+	    };
+	    return _this;
 	  }
 
 	  _createClass(CommentBox, [{
-	    key: "render",
+	    key: 'hundleSubmit',
+	    value: function hundleSubmit(e) {
+	      e.preventDefault();
+	      console.log(this.refs.content.value);
+	      var content = this.refs.content.value;
+	      var comments = this.state.comments;
+	      comments.push(content);
+	      this.setState({ comments: comments });
+	      this.refs.commentForm.reset();
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
+	      var commentList = this.state.comments.map(function (res, i) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: i, className: 'comment' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            res
+	          )
+	        );
+	      });
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "comment-box" },
-	        "CommentBox"
+	        'div',
+	        { className: 'comment-box' },
+	        commentList,
+	        _react2.default.createElement(
+	          'form',
+	          { ref: 'commentForm', className: 'comment-form', onSubmit: this.hundleSubmit.bind(this) },
+	          _react2.default.createElement('input', { type: 'text', className: 'input', ref: 'content' }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'submit-btn' },
+	            'save'
+	          )
+	        ),
+	        _react2.default.createElement('div', { className: 'underline' })
 	      );
 	    }
 	  }]);
