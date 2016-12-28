@@ -15,7 +15,7 @@ class CommentBox extends Component{
     console.log(store.getState());
     // 让输入框里保存一次数据就会清零
     this.refs.commentForm.reset();
-    console.log(this.refs);
+    // console.log(this.refs);
     this.setState({comments: store.getState()});
     // console.log(this.refs.content.value);
     // let content = this.refs.content.value;
@@ -31,12 +31,12 @@ class CommentBox extends Component{
     )
     return(
       <div className="comment-box">
-          {commentList}
-          <form ref='commentForm' className='comment-form' onSubmit={this.hundleSubmit.bind(this)} >
-            <input type='text' className='input' ref='content' />
-            <button type='submit' className='submit-btn' >save</button>
-          </form>
-          <div className='underline'></div>
+        {commentList}
+        <form ref='commentForm' className='comment-form' onSubmit={this.hundleSubmit.bind(this)} >
+          <input type='text' className='input' ref='content' />
+          <button type='submit' className='submit-btn' >save</button>
+        </form>
+        <div className='underline'></div>
       </div>
     )
   }
