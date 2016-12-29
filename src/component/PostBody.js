@@ -7,13 +7,15 @@ class PostBody extends Component{
       <div className="post-body">
         PostBody
         <div className="comment-num">
-           { this.props.comments.length }
+           { this.props.comments.length }...
+           { this.props.id }
         </div>
      </div>
     )
   }
 }
 const mapStateToProps = (state) => ({
-  comments: state
+  comments: state.comments,
+  posts: state.posts
 })
 export default connect(mapStateToProps)(PostBody);

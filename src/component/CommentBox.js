@@ -5,7 +5,7 @@ class CommentBox extends Component{
   constructor(){
     super();
     this.state={
-      comments:store.getState()
+      comments:store.getState().comments
     }
   }
   hundleSubmit(e){
@@ -16,7 +16,7 @@ class CommentBox extends Component{
     // 让输入框里保存一次数据就会清零
     this.refs.commentForm.reset();
     // console.log(this.refs);
-    this.setState({comments: store.getState()});
+    this.setState({comments: store.getState().comments });
     // console.log(this.refs.content.value);
     // let content = this.refs.content.value;
     // let comments = this.state.comments;
